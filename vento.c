@@ -32,19 +32,14 @@
 const unsigned char OneSec =   5;
 const int maxDelay = 2100;// =7*60*OneSec;
 
-int YELDelay = 1000;
-int BLUDelay = 100;
-
 int delay;
 
 ISR(INT0_vect)
 {
-//  BLU_ON;
-  delay = maxDelay;
+  BLU_ON;
   set_Timer_Cnt;
 //  TIMSK0 |= (unsigned char)_BV(TOIE0);
   set_sleep_mode( SLEEP_MODE_IDLE );
-  yel_ON;
 } // SIGNAL(SIG_PIN_CHANGE0)
 
 //ISR(TIM0_OVF_vect)
@@ -76,6 +71,7 @@ int main(void)
   PORTA = 0b11111110;
 
   DDRB  = 0b10111111;
+  PORTB = 0b11111110;
 
   GIMSK = ( 1 << INT0 );
   //  MCUCR = 0; // 0 on INT0
